@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Proyecto Tema 3</title>
+    <link rel="stylesheet" href="~/Content/styles.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>📦 Proyecto Tema 3</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="@Url.Action("Index", "Home")" class="nav-link">Inicio</a></li>
+                <li><a href="@Url.Action("Index", "Articulos")" class="nav-link">Artículos</a></li>
+                <li><a href="@Url.Action("Create", "Articulos")" class="nav-link btn-agregar">+ Agregar Artículo</a></li>
+                <li class="nav-right">
+                    <span class="user-welcome">Bienvenido, @Session["NombreCompleto"]</span>
+                    <a href="@Url.Action("Logout", "Login")" class="nav-link btn-logout">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Proyecto Tema 3 - MVC C# con SQL Server</p>
+    </footer>
+</body>
+</html>

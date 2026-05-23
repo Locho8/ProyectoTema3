@@ -1,0 +1,70 @@
+@model IEnumerable<ProyectoTema3.Models.Articulo>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Listado de Artículos";
+}
+
+<div class="articulos-section">
+    <div class="section-header">
+        <h2>📋 Listado de Artículos</h2>
+        <a href="@Url.Action("Create", "Articulos")" class="btn btn-primary">+ Nuevo Artículo</a>
+    </div>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-error">@ViewBag.Error</div>
+    }
+
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Categoría</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>#@item.IdArticulo</td>
+                            <td><strong>@item.Nombre</strong></td>
+                            <td>@(String.IsNullOrEmpty(item.Descripcion) ? "--" : item.Descripcion.Substring(0, Math.Min(50, item.Descripcion.Length)) + "...")</td>
+                            <td>$@item.Precio.ToString("F2")</td>
+                            <td>
+                                @if (item.Stock > 0)
+                                {
+                                    <span class="badge badge-success">@item.Stock</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">Sin stock</span>
+                                }
+                            </td>
+                            <td>@item.Categoria</td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Articulos", new { id = item.IdArticulo })" class="btn btn-small btn-edit">✏️ Editar</a>
+                                <a href="@Url.Action("Delete", "Articulos", new { id = item.IdArticulo })" class="btn btn-small btn-delete" onclick="return confirm('¿Estás seguro?');">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <p>No hay artículos registrados</p>
+            <a href="@Url.Action("Create", "Articulos")" class="btn btn-primary">Crear el primer artículo</a>
+        </div>
+    }
+</div>

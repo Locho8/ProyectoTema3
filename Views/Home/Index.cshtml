@@ -1,0 +1,38 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Inicio";
+}
+
+<div class="welcome-section">
+    <div class="welcome-card">
+        <h2>👋 ¡Bienvenido, @Session["NombreCompleto"]!</h2>
+        <p>Has iniciado sesión correctamente en el Proyecto Tema 3</p>
+    </div>
+
+    <div class="dashboard-cards">
+        <div class="card">
+            <div class="card-icon">📦</div>
+            <h3>Artículos</h3>
+            <p>Gestiona el inventario de productos</p>
+            <a href="@Url.Action("Index", "Articulos")" class="btn btn-primary">Ver Artículos</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">➕</div>
+            <h3>Nuevo Artículo</h3>
+            <p>Registra nuevos productos en el sistema</p>
+            <a href="@Url.Action("Create", "Articulos")" class="btn btn-primary">Crear</a>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <h3>ℹ️ Información del Sistema</h3>
+        <ul class="feature-list">
+            <li>✅ Autenticación de usuarios con Login</li>
+            <li>✅ CRUD completo de artículos (Crear, Leer, Actualizar, Eliminar)</li>
+            <li>✅ Base de datos SQL Server integrada</li>
+            <li>✅ Interfaz responsiva y moderna</li>
+            <li>✅ Gestión de stock y categorías</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+@model ProyectoTema3.Models.LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "Login";
+}
+
+<div class="login-form">
+    <div class="login-header">
+        <h2>🔐 Iniciar Sesión</h2>
+        <p>Ingresa tus credenciales</p>
+    </div>
+
+    @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.NombreUsuario, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.NombreUsuario, new { @class = "form-input", @placeholder = "Usuario" })
+            @Html.ValidationMessageFor(m => m.NombreUsuario, "", new { @class = "error-message" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Contraseña, new { @class = "form-label" })
+            @Html.PasswordFor(m => m.Contraseña, new { @class = "form-input", @placeholder = "Contraseña" })
+            @Html.ValidationMessageFor(m => m.Contraseña, "", new { @class = "error-message" })
+        </div>
+
+        <div class="form-group checkbox">
+            @Html.CheckBoxFor(m => m.Recuerdame, new { @class = "form-checkbox" })
+            @Html.LabelFor(m => m.Recuerdame, "Recuérdame", new { @class = "checkbox-label" })
+        </div>
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-error">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
+        <button type="submit" class="btn btn-primary btn-large">Iniciar Sesión</button>
+    }
+
+    <div class="login-footer">
+        <p>Credenciales de prueba:</p>
+        <p><strong>Usuario:</strong> admin</p>
+        <p><strong>Contraseña:</strong> 123456</p>
+    </div>
+</div>
